@@ -1,39 +1,34 @@
 import React, { PropTypes } from "react";
+import { Link } from "react-router-dom";
 
 import "./FeaturedProduct.css";
 
-export default function FeaturedProduct( { addToCart, description, logo, name, onSale, price } ) {
+export default function ProductTile( { addToCart, logo, name, price } ) {
 	return (
-		<div className="featured-product">
-			<div className="featured-product__logo-name-wrapper">
-				<img
-					alt={ `${ name } logo` }
-					className="featured-product__logo"
-					src={ "" /* product logo */ }
-				/>
-				<h3 className="featured-product__name">{ /* product name */ }</h3>
-			</div>
-			<p className="featured-product__description">{ /* product description */ }</p>
-			<div className="featured-product__buy-wrapper">
-				<p className="featured-product__price-reduced">Price Reduced!</p>
+		<div className="product-tile">
+			<section className="product-tile__info">
+				<Link to={ `/details/${ name }` }><h3>{ name }</h3></Link>
 				<button
-					className="featured-product__buy"
+					className="product-tile__buy"
 					onClick={ addToCart }
 				>
-					${ /* product price */ }
+					${ price }
 				</button>
-			</div>
+			</section>
+			<section className="product-tile__logo-wrapper">
+				<img
+					className="product-tile__logo"
+					alt={ `${ name } logo` }
+					src={ logo }
+				/>
+			</section>
 		</div>
 	);
 }
 
-FeaturedProduct.propTypes = {
+ProductTile.propTypes = {
 	  addToCart: PropTypes.func.isRequired
-	, description: PropTypes.string.isRequired
 	, logo: PropTypes.string.isRequired
 	, name: PropTypes.string.isRequired
-	, onSale: PropTypes.bool
 	, price: PropTypes.number.isRequired
 };
-
-FeaturedProduct.defaultProps = { onSale: false };
